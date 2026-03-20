@@ -1,658 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Freecash – Scroll Videos Offer</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
 
-  body {
-    background: #000;
-    color: #fff;
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
-  .screen {
-    display: none;
-    width: 100%;
-    max-width: 480px;
-    min-height: 100vh;
-    padding: 48px 20px 40px;
-    flex-direction: column;
-    align-items: center;
-  }
-  .screen.active { display: flex; }
-
-  /* ── PRELANDER (Screen 1) ── */
-  #screen-age {
-    justify-content: center;
-    gap: 0;
-  }
-
-  .app-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 18px;
-    background: #0d2018;
-    border: 1.5px solid #1a4a2e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    overflow: hidden;
-  }
-  .app-icon img { width: 56px; height: 56px; object-fit: contain; }
-
-  .offer-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    border: 1.5px solid #2e7d4f;
-    border-radius: 20px;
-    padding: 5px 14px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    color: #fff;
-    margin-bottom: 28px;
-    text-transform: uppercase;
-  }
-  .offer-badge .dot {
-    width: 7px; height: 7px;
-    background: #3de87a;
-    border-radius: 50%;
-  }
-
-  .headline {
-    font-size: 38px;
-    font-weight: 900;
-    text-align: center;
-    letter-spacing: -0.5px;
-    margin-bottom: 10px;
-    line-height: 1.1;
-  }
-  .headline .green { color: #3de87a; }
-
-  .subline {
-    font-size: 14px;
-    color: #aaa;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-
-  .info-box {
-    width: 100%;
-    background: #0a1f14;
-    border: 1.5px solid #1a4a2e;
-    border-radius: 14px;
-    padding: 18px 16px;
-    margin-bottom: 30px;
-  }
-  .info-box .info-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    color: #3de87a;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .info-box .info-title::before {
-    content: '';
-    width: 7px; height: 7px;
-    background: #3de87a;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .info-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-  .info-item:last-child { margin-bottom: 0; }
-  .info-icon {
-    width: 34px; height: 34px;
-    background: #122a1c;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .info-icon svg { width: 16px; height: 16px; }
-  .info-text {
-    font-size: 13.5px;
-    line-height: 1.5;
-    color: #ddd;
-    padding-top: 6px;
-  }
-  .info-text b { color: #fff; font-weight: 700; }
-
-  .btn-yes {
-    width: 100%;
-    background: #3de87a;
-    color: #000;
-    border: none;
-    border-radius: 50px;
-    padding: 17px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    margin-bottom: 12px;
-    transition: opacity 0.15s;
-  }
-  .btn-yes:hover { opacity: 0.9; }
-
-  .btn-no {
-    width: 100%;
-    background: transparent;
-    color: #888;
-    border: 1.5px solid #2a2a2a;
-    border-radius: 50px;
-    padding: 16px;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: border-color 0.15s;
-  }
-  .btn-no:hover { border-color: #444; color: #bbb; }
-
-  /* ── BLOCKED (Screen 2) ── */
-  #screen-blocked {
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-  }
-  .lock-icon {
-    width: 80px; height: 80px;
-    background: #111;
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 8px;
-  }
-  .lock-icon svg { width: 38px; height: 38px; }
-  .blocked-title {
-    font-size: 28px;
-    font-weight: 900;
-    letter-spacing: 0.5px;
-    text-align: center;
-  }
-  .blocked-sub {
-    font-size: 14px;
-    color: #888;
-    text-align: center;
-  }
-  .btn-back {
-    margin-top: 8px;
-    background: #111;
-    color: #fff;
-    border: 1.5px solid #333;
-    border-radius: 50px;
-    padding: 13px 28px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: background 0.15s;
-  }
-  .btn-back:hover { background: #1a1a1a; }
-
-  /* ── LANDING (Screen 3) ── */
-  #screen-landing {
-    justify-content: flex-start;
-    padding-top: 36px;
-  }
-
-  .logos-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-  .logo-box {
-    width: 58px; height: 58px;
-    border-radius: 14px;
-    background: #0d2018;
-    border: 1.5px solid #1a4a2e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .logo-box img { width: 40px; height: 40px; object-fit: contain; }
-  .logo-box.tiktok {
-    background: #111;
-    border-color: #333;
-  }
-  .logo-x {
-    font-size: 18px;
-    color: #888;
-    font-weight: 300;
-  }
-
-  .qualified-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #0a2015;
-    border: 1.5px solid #1e5e30;
-    border-radius: 20px;
-    padding: 6px 14px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #3de87a;
-    margin-bottom: 24px;
-    letter-spacing: 0.3px;
-  }
-  .qualified-badge svg { width: 14px; height: 14px; }
-
-  .landing-headline {
-    font-size: 34px;
-    font-weight: 900;
-    text-align: center;
-    line-height: 1.15;
-    margin-bottom: 10px;
-  }
-  .landing-headline .green { color: #3de87a; }
-
-  .landing-sub {
-    font-size: 14px;
-    color: #888;
-    text-align: center;
-    margin-bottom: 24px;
-  }
-
-  .btn-download {
-    width: 100%;
-    background: #3de87a;
-    color: #000;
-    border: none;
-    border-radius: 14px;
-    padding: 16px 20px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 28px;
-    transition: opacity 0.15s;
-  }
-  .btn-download:hover { opacity: 0.9; }
-  .btn-download .dl-icon {
-    width: 30px; height: 30px;
-    flex-shrink: 0;
-  }
-  .btn-download .dl-text { text-align: left; line-height: 1.2; }
-  .btn-download .dl-text .sub { font-size: 12px; font-weight: 500; }
-
-  .section-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    color: #555;
-    margin-bottom: 12px;
-    text-align: center;
-    text-transform: uppercase;
-  }
-
-  /* Scroll Videos offer card */
-  .offer-card {
-    width: 100%;
-    background: #0d1a10;
-    border: 1.5px solid #1a4a2e;
-    border-radius: 14px;
-    padding: 14px 16px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 14px;
-    cursor: pointer;
-    transition: border-color 0.15s;
-  }
-  .offer-card:hover { border-color: #3de87a; }
-  .play-circle {
-    width: 46px; height: 46px;
-    background: #1a3a22;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .offer-info { flex: 1; }
-  .offer-name {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 3px;
-  }
-  .offer-name-sub {
-    font-size: 12px;
-    color: #888;
-  }
-  .rate-badge {
-    background: #3de87a;
-    color: #000;
-    font-size: 11px;
-    font-weight: 800;
-    border-radius: 6px;
-    padding: 2px 7px;
-    margin-left: 6px;
-  }
-  .offer-right { text-align: right; }
-  .offer-price {
-    font-size: 22px;
-    font-weight: 900;
-    color: #3de87a;
-  }
-  .offer-stars {
-    font-size: 11px;
-    color: #f5a623;
-  }
-  .offer-arrow {
-    color: #555;
-    font-size: 18px;
-    margin-left: 4px;
-  }
-
-  /* Activation card */
-  .activation-card {
-    width: 100%;
-    background: #1a1200;
-    border: 1.5px solid #3d2e00;
-    border-radius: 14px;
-    padding: 14px 16px;
-    margin-bottom: 28px;
-    position: relative;
-  }
-  .important-badge {
-    position: absolute;
-    top: -1px;
-    right: 14px;
-    background: #f5a623;
-    color: #000;
-    font-size: 10px;
-    font-weight: 800;
-    border-radius: 0 0 8px 8px;
-    padding: 3px 10px;
-    letter-spacing: 0.5px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    text-transform: uppercase;
-  }
-  .activation-inner {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .lock-sm {
-    width: 34px; height: 34px;
-    background: #2a1e00;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .activation-title {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .activation-desc {
-    font-size: 12.5px;
-    color: #aaa;
-    line-height: 1.5;
-  }
-  .activation-desc .hl { color: #f5a623; font-weight: 700; }
-  .activation-desc .green { color: #3de87a; font-weight: 600; }
-
-  /* How it works */
-  .step-card {
-    width: 100%;
-    background: #0d1a10;
-    border: 1.5px solid #1a3a22;
-    border-radius: 14px;
-    padding: 16px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-  }
-  .step-icon {
-    width: 44px; height: 44px;
-    background: #122a1c;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .step-icon svg { width: 20px; height: 20px; }
-  .step-title {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .step-desc {
-    font-size: 12.5px;
-    color: #aaa;
-    line-height: 1.5;
-  }
-  .step-desc .green { color: #3de87a; font-weight: 600; }
-  .step-btn {
-    display: inline-block;
-    margin-top: 8px;
-    border: 1.5px solid #2e7d4f;
-    color: #3de87a;
-    background: transparent;
-    border-radius: 6px;
-    padding: 4px 12px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    text-transform: uppercase;
-  }
-</style>
+  ttq.load('D6R9ICJC77U1CBCKLDAG');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Freecash - Start Earning Today</title>
+  <meta name="description" content="Join 500K+ people earning daily by completing simple tasks and playing games." />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#080810;color:#f0f4f8;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    #app{max-width:480px;margin:0 auto;padding:64px 20px 40px;position:relative;z-index:1}
+    .orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:.3;pointer-events:none;z-index:0}
+    .orb1{width:400px;height:400px;background:radial-gradient(circle,rgba(0,255,128,.15),transparent);top:-100px;left:-100px;animation:float1 20s ease-in-out infinite}
+    .orb2{width:300px;height:300px;background:radial-gradient(circle,rgba(0,179,89,.12),transparent);bottom:-50px;right:-50px;animation:float2 15s ease-in-out infinite}
+    @keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,50px) scale(1.1)}}
+    @keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,-40px) scale(1.15)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleBounce{0%{transform:scale(0);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+    @keyframes pulseGlow{0%,100%{box-shadow:0 10px 30px rgba(0,255,128,.25)}50%{box-shadow:0 15px 50px rgba(0,255,128,.5)}}
+    @keyframes glowBorder{0%,100%{box-shadow:0 0 20px rgba(220,70,70,.3);border-color:#dc4646}50%{box-shadow:0 0 35px rgba(220,70,70,.5);border-color:#e07070}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes pulseSoft{0%,100%{opacity:1}50%{opacity:.6}}
+    @keyframes slideStagger{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes numPop{0%{transform:scale(0) rotate(-180deg)}60%{transform:scale(1.2) rotate(10deg)}100%{transform:scale(1) rotate(0)}}
+    @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+    .fade-up{animation:fadeUp .5s ease-out both}
+    .scale-bounce{animation:scaleBounce .5s cubic-bezier(.34,1.56,.64,1) both}
+    .logo-wrap{display:flex;flex-direction:column;align-items:center;animation:fadeUp .5s ease-out both}
+    .logo-banner{max-width:100px;width:100%;height:auto;margin-bottom:16px;border-radius:12px;transition:transform .3s}
+    .logo-banner:hover{transform:scale(1.05)}
+    .stars{display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:4px}
+    .star{width:20px;height:20px;fill:#00ff80;color:#00ff80}
+    .rating{font-size:14px;color:#8090a0;margin-left:8px}
+    .tag{text-align:center;font-size:11px;font-weight:600;color:#8090a0;text-transform:uppercase;letter-spacing:.15em;margin-top:4px;margin-bottom:0}
+    .progress-wrap{margin:24px 0 32px;animation:fadeUp .6s ease-out .1s both}
+    .progress-labels{display:flex;justify-content:space-between;margin-bottom:8px;font-size:12px;color:#8090a0}
+    .progress-labels strong{color:#f0f4f8}
+    .progress-bar{height:8px;background:#1a1a2e;border-radius:99px;overflow:hidden}
+    .progress-fill{height:100%;background:linear-gradient(135deg,#00ff80,#00b359);border-radius:99px;transition:width .5s ease;box-shadow:0 0 12px rgba(0,255,128,.4)}
+    .content{transition:opacity .3s,transform .3s}
+    .content.hidden{opacity:0;transform:translateY(-20px) scale(.98)}
+    .question{font-size:1.6rem;font-weight:800;line-height:1.3;margin-bottom:24px;background:linear-gradient(90deg,#f0f4f8,#00ff80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .option{width:100%;display:flex;align-items:center;justify-content:space-between;padding:16px;margin-bottom:12px;border:2px solid #1a1a2e;border-radius:12px;background:#0d0d1a;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;text-align:left;color:#f0f4f8}
+    .option:hover{border-color:#00ff80;box-shadow:0 4px 20px rgba(0,255,128,.15)}
+    .option:active{transform:scale(.97)}
+    .option svg{width:16px;height:16px;color:#8090a0;transition:color .2s;flex-shrink:0}
+    .option:hover svg{color:#00ff80}
+    .age-btn{width:100%;padding:20px;margin-bottom:12px;border-radius:12px;cursor:pointer;transition:all .2s;font-family:inherit;text-align:left;border:2px solid transparent}
+    .age-btn:active{transform:scale(.97)}
+    .age-over{border-color:rgba(0,255,128,.5);background:linear-gradient(135deg,rgba(0,255,128,.2),rgba(0,255,128,.1))}
+    .age-over:hover{border-color:#00ff80;box-shadow:0 4px 25px rgba(0,255,128,.3)}
+    .age-over .age-label{font-size:1.1rem;font-weight:800;color:#00ff80;margin-bottom:4px}
+    .age-over .age-sub{font-size:.85rem;color:#8090a0}
+    .age-under{border-color:#1a1a2e;background:rgba(13,13,26,.5);opacity:.6}
+    .age-under:hover{border-color:rgba(128,144,160,.3)}
+    .age-under .age-label{font-size:1.1rem;font-weight:800;color:#8090a0;margin-bottom:4px}
+    .age-under .age-sub{font-size:.85rem;color:rgba(128,144,160,.7)}
+    .verifying{text-align:center;padding:48px 0}
+    .spinner-wrap{width:64px;height:64px;margin:0 auto 24px;position:relative}
+    .spinner-bg{position:absolute;inset:0;border-radius:50%;border:3px solid #1a1a2e}
+    .spinner{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;border-top-color:#00ff80;animation:spin .8s linear infinite}
+    .verifying h2{font-size:1.2rem;font-weight:700;animation:pulseSoft 1.5s ease infinite}
+    .verifying p{font-size:.85rem;color:#8090a0;margin-top:8px}
+    .eligible{text-align:center;padding:32px 0}
+    .check-circle{width:80px;height:80px;border-radius:50%;background:rgba(0,255,128,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 0 30px rgba(0,255,128,.3)}
+    .check-circle svg{width:40px;height:40px;color:#00ff80}
+    .eligible h2{font-size:1.8rem;font-weight:800;color:#00ff80;margin-bottom:8px}
+    .eligible p{color:#8090a0;font-size:.95rem}
+    .eligible strong{color:#f0f4f8}
+    .claim h2{font-size:1.5rem;font-weight:800;margin-bottom:8px;background:linear-gradient(90deg,#f0f4f8,#00ff80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .claim>p{color:#8090a0;margin-bottom:24px}
+    .steps-box{background:#0d0d1a;border:1px solid #1a1a2e;border-radius:20px;padding:24px;margin-bottom:24px;box-shadow:0 12px 40px rgba(0,0,0,.8),0 0 30px rgba(0,255,128,.08)}
+    .steps-box h3{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px;text-align:center;color:#8090a0}
+    .step{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px}
+    .step:last-child{margin-bottom:0}
+    .step-icon{width:44px;height:44px;border-radius:50%;background:#1a1a2e;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+    .step-icon svg{width:20px;height:20px;color:#00ff80}
+    .step-text strong{display:block;font-size:.9rem;font-weight:600;margin-bottom:2px}
+    .step-text span{font-size:.8rem;color:#8090a0}
+    .notice{border:2px solid #dc4646;border-radius:16px;padding:20px;margin-bottom:24px;text-align:left;background:linear-gradient(135deg,hsl(15,50%,8%),#0d0d1a);position:relative;animation:glowBorder 2s ease-in-out infinite}
+    .notice-badge{position:absolute;top:-1px;right:20px;background:#dc4646;color:#fff;font-size:10px;font-weight:800;padding:4px 12px;border-radius:0 0 8px 8px;letter-spacing:.5px}
+    .notice-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .notice-title{font-size:16px;font-weight:700}
+    .notice p{font-size:14px;color:#8090a0;line-height:1.5;margin:0}
+    .highlight{color:#00ff80;font-weight:700}
+    .cta{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:20px;border-radius:16px;background:linear-gradient(135deg,#00ff80,#00b359);color:#080810;font-size:17px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;text-decoration:none;cursor:pointer;border:0;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(0,255,128,.25);transition:all .3s;animation:pulseGlow 3s ease-in-out infinite;font-family:inherit}
+    .cta::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);animation:shimmer 2s ease-in-out infinite}
+    .cta:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(0,255,128,.5)}
+    .cta svg{width:24px;height:24px;flex-shrink:0}
+    .cta svg:last-child{width:18px;height:18px}
+    .fine{text-align:center;font-size:11px;color:rgba(128,144,160,.7);margin-top:16px}
+    @media(max-width:600px){#app{padding:80px 16px 32px}.question{font-size:1.3rem}.eligible h2{font-size:1.5rem}}
+      #downloadNowBtn {
+    position: sticky;
+    bottom: 20px;
+    z-index: 999;
+      }
+  </style>
 </head>
 <body>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div id="app"></div>
+  <script>
+    var BASE_URL="https://raintrks.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY5YmM4Y2RkMmM1YWQyMDZmZmMyNGVjOSIsInRzIjoxNzc0MDM4NDk4NjM0fQ";
+    var TRANSLATIONS={
+      en:{rating:"4.8/5",tag:"Exclusive Reward",progress:"Progress",questions:[{question:"How do you want to earn money?",options:["Playing Games","Completing Surveys","Watching Videos","Testing Apps"]},{question:"How much would you like to earn per month?",options:["$50 – $100","$100 – $500","$500 – $1,000","$1,000+"]}],ageGate:{question:"Select your age range to see available payout options",over21:{label:"I'm over 21",subtitle:"Instant Payouts: PayPal, CashApp, Venmo, Crypto & Wire"},under21:{label:"I'm under 21",subtitle:"Limited Payouts: Wire Transfer Only"}},verifying:{title:"Checking your eligibility...",subtitle:"This will only take a moment"},eligible:{title:"You're Eligible!",subtitle:'Great news — your earning account is <strong>pre-qualified</strong> for higher payouts.'},claim:{title:"Almost There!",subtitle:"Follow these simple steps to start earning.",stepsTitle:"Your Earning Journey",steps:[{title:"Download the App",desc:"Available on iOS & Android — Takes less than 60 seconds"},{title:"Complete Daily Offers",desc:"Watch videos, test apps & games, or take surveys"},{title:"Cash Out Your Earnings",desc:"Instant Payouts: PayPal, CashApp, Venmo, Crypto & Wire"}],noticeBadge:"⚠️ IMPORTANT",noticeTitle:"Activation Required",noticeText:"New users: Complete ",highlightText:"2 quick offers",noticeSuffix:" to unlock full access and start earning by watching videos.",cta:"Download Now",fine:"Trusted by over 500,000 users earning money daily"}},
+      ja:{rating:"4.8/5",tag:"限定リワード",progress:"進捗",questions:[{question:"どのように稼ぎたいですか？",options:["ゲームをプレイ","アンケートに回答","動画を視聴","アプリをテスト"]},{question:"月にいくら稼ぎたいですか？",options:["¥7,000 – ¥15,000","¥15,000 – ¥75,000","¥75,000 – ¥150,000","¥150,000+"]}],ageGate:{question:"利用可能な支払いオプションを確認するために年齢を選択してください",over21:{label:"21歳以上です",subtitle:"即時支払い：PayPal、CashApp、Venmo、暗号通貨、銀行振込"},under21:{label:"21歳未満です",subtitle:"限定支払い：銀行振込のみ"}},verifying:{title:"資格を確認中...",subtitle:"少々お待ちください"},eligible:{title:"資格あり！",subtitle:'おめでとうございます — あなたのアカウントは<strong>高額報酬の対象</strong>です。'},claim:{title:"あと少しです！",subtitle:"以下の簡単なステップで稼ぎ始めましょう。",stepsTitle:"稼ぐまでの流れ",steps:[{title:"アプリをダウンロード",desc:"iOS・Android対応 — 60秒以内で完了"},{title:"デイリーオファーを完了",desc:"動画視聴、アプリテスト、アンケート回答"},{title:"報酬を受け取る",desc:"即時出金：PayPal、暗号通貨、銀行振込"}],noticeBadge:"⚠️ 重要",noticeTitle:"アクティベーションが必要です",noticeText:"新規ユーザー：",highlightText:"2つの簡単なオファー",noticeSuffix:"を完了して、フルアクセスを解除し、動画視聴で稼ぎ始めましょう。",cta:"今すぐダウンロード",fine:"毎日50万人以上が利用中"}},
+      es:{rating:"4.8/5",tag:"Recompensa Exclusiva",progress:"Progreso",questions:[{question:"¿Cómo quieres ganar dinero?",options:["Jugando Juegos","Completando Encuestas","Viendo Videos","Probando Apps"]},{question:"¿Cuánto te gustaría ganar al mes?",options:["$50 – $100","$100 – $500","$500 – $1,000","$1,000+"]}],ageGate:{question:"Selecciona tu rango de edad para ver las opciones de pago disponibles",over21:{label:"Tengo más de 21",subtitle:"Pagos Instantáneos: PayPal, CashApp, Venmo, Cripto y Transferencia"},under21:{label:"Tengo menos de 21",subtitle:"Pagos Limitados: Solo Transferencia Bancaria"}},verifying:{title:"Verificando tu elegibilidad...",subtitle:"Solo tomará un momento"},eligible:{title:"¡Eres Elegible!",subtitle:'Buenas noticias — tu cuenta está <strong>pre-calificada</strong> para pagos más altos.'},claim:{title:"¡Casi Listo!",subtitle:"Sigue estos simples pasos para comenzar a ganar.",stepsTitle:"Tu Camino para Ganar",steps:[{title:"Descarga la App",desc:"Disponible en iOS y Android — Menos de 60 segundos"},{title:"Completa Ofertas Diarias",desc:"Ve videos, prueba apps y juegos, o haz encuestas"},{title:"Cobra tus Ganancias",desc:"Pagos Instantáneos: PayPal, CashApp, Venmo, Cripto"}],noticeBadge:"⚠️ IMPORTANTE",noticeTitle:"Activación Requerida",noticeText:"Nuevos usuarios: Completa ",highlightText:"2 ofertas rápidas",noticeSuffix:" para desbloquear acceso completo y comenzar a ganar viendo videos.",cta:"Descargar Ahora",fine:"Más de 500,000 usuarios ganando dinero diariamente"}},
+      fr:{rating:"4.8/5",tag:"Récompense Exclusive",progress:"Progression",questions:[{question:"Comment voulez-vous gagner de l'argent ?",options:["Jouer à des jeux","Répondre à des sondages","Regarder des vidéos","Tester des apps"]},{question:"Combien aimeriez-vous gagner par mois ?",options:["50€ – 100€","100€ – 500€","500€ – 1 000€","1 000€+"]}],ageGate:{question:"Sélectionnez votre tranche d'âge pour voir les options de paiement",over21:{label:"J'ai plus de 21 ans",subtitle:"Paiements Instantanés : PayPal, CashApp, Venmo, Crypto et Virement"},under21:{label:"J'ai moins de 21 ans",subtitle:"Paiements Limités : Virement Bancaire Uniquement"}},verifying:{title:"Vérification de votre éligibilité...",subtitle:"Cela ne prendra qu'un instant"},eligible:{title:"Vous êtes Éligible !",subtitle:'Bonne nouvelle — votre compte est <strong>pré-qualifié</strong> pour des paiements plus élevés.'},claim:{title:"Presque Fini !",subtitle:"Suivez ces étapes simples pour commencer à gagner.",stepsTitle:"Votre Parcours",steps:[{title:"Téléchargez l'App",desc:"Disponible sur iOS et Android — Moins de 60 secondes"},{title:"Complétez les Offres",desc:"Regardez des vidéos, testez des apps ou répondez à des sondages"},{title:"Encaissez vos Gains",desc:"Paiements Instantanés : PayPal, Crypto, Virement"}],noticeBadge:"⚠️ IMPORTANT",noticeTitle:"Activation Requise",noticeText:"Nouveaux utilisateurs : Complétez ",highlightText:"2 offres rapides",noticeSuffix:" pour débloquer l'accès complet et commencer à gagner en regardant des vidéos.",cta:"Télécharger Maintenant",fine:"Plus de 500 000 utilisateurs gagnent de l'argent chaque jour"}},
+      de:{rating:"4.8/5",tag:"Exklusive Belohnung",progress:"Fortschritt",questions:[{question:"Wie möchten Sie Geld verdienen?",options:["Spiele spielen","Umfragen ausfüllen","Videos ansehen","Apps testen"]},{question:"Wie viel möchten Sie pro Monat verdienen?",options:["50€ – 100€","100€ – 500€","500€ – 1.000€","1.000€+"]}],ageGate:{question:"Wählen Sie Ihre Altersgruppe, um verfügbare Auszahlungsoptionen zu sehen",over21:{label:"Ich bin über 21",subtitle:"Sofortige Auszahlung: PayPal, CashApp, Venmo, Krypto & Überweisung"},under21:{label:"Ich bin unter 21",subtitle:"Eingeschränkte Auszahlung: Nur Überweisung"}},verifying:{title:"Berechtigung wird geprüft...",subtitle:"Einen Moment bitte"},eligible:{title:"Sie sind berechtigt!",subtitle:'Gute Nachricht — Ihr Konto ist für <strong>höhere Auszahlungen vorqualifiziert</strong>.'},claim:{title:"Fast Geschafft!",subtitle:"Folgen Sie diesen einfachen Schritten.",stepsTitle:"Ihr Weg zum Verdienst",steps:[{title:"App Herunterladen",desc:"Verfügbar für iOS & Android — Weniger als 60 Sekunden"},{title:"Tägliche Angebote Abschließen",desc:"Videos ansehen, Apps testen oder Umfragen ausfüllen"},{title:"Verdienst Auszahlen",desc:"Sofortige Auszahlung: PayPal, Krypto, Überweisung"}],noticeBadge:"⚠️ WICHTIG",noticeTitle:"Aktivierung Erforderlich",noticeText:"Neue Benutzer: Schließen Sie ",highlightText:"2 schnelle Angebote",noticeSuffix:" ab, um vollen Zugang freizuschalten und durch Videos ansehen zu verdienen.",cta:"Jetzt Herunterladen",fine:"Über 500.000 Nutzer verdienen täglich Geld"}},
+      pt:{rating:"4.8/5",tag:"Recompensa Exclusiva",progress:"Progresso",questions:[{question:"Como você quer ganhar dinheiro?",options:["Jogando Games","Respondendo Pesquisas","Assistindo Vídeos","Testando Apps"]},{question:"Quanto você gostaria de ganhar por mês?",options:["R$250 – R$500","R$500 – R$2.500","R$2.500 – R$5.000","R$5.000+"]}],ageGate:{question:"Selecione sua faixa etária para ver as opções de pagamento disponíveis",over21:{label:"Tenho mais de 21",subtitle:"Pagamentos Instantâneos: PayPal, CashApp, Venmo, Cripto e Transferência"},under21:{label:"Tenho menos de 21",subtitle:"Pagamentos Limitados: Apenas Transferência Bancária"}},verifying:{title:"Verificando sua elegibilidade...",subtitle:"Isso levará apenas um momento"},eligible:{title:"Você é Elegível!",subtitle:'Ótima notícia — sua conta está <strong>pré-qualificada</strong> para pagamentos maiores.'},claim:{title:"Quase Lá!",subtitle:"Siga estes passos simples para começar a ganhar.",stepsTitle:"Sua Jornada de Ganhos",steps:[{title:"Baixe o App",desc:"Disponível para iOS e Android — Menos de 60 segundos"},{title:"Complete Ofertas Diárias",desc:"Assista vídeos, teste apps e jogos, ou responda pesquisas"},{title:"Saque seus Ganhos",desc:"Pagamentos Instantâneos: PayPal, Pix, Cripto"}],noticeBadge:"⚠️ IMPORTANTE",noticeTitle:"Ativação Necessária",noticeText:"Novos usuários: Complete ",highlightText:"2 ofertas rápidas",noticeSuffix:" para desbloquear acesso completo e começar a ganhar assistindo vídeos.",cta:"Baixar Agora",fine:"Mais de 500.000 usuários ganhando dinheiro diariamente"}},
+      it:{rating:"4.8/5",tag:"Ricompensa Esclusiva",progress:"Progresso",questions:[{question:"Come vuoi guadagnare?",options:["Giocando","Sondaggi","Guardando Video","Testando App"]},{question:"Quanto vorresti guadagnare al mese?",options:["50€ – 100€","100€ – 500€","500€ – 1.000€","1.000€+"]}],ageGate:{question:"Seleziona la tua fascia d'età per vedere le opzioni di pagamento disponibili",over21:{label:"Ho più di 21 anni",subtitle:"Pagamenti Istantanei: PayPal, CashApp, Venmo, Crypto e Bonifico"},under21:{label:"Ho meno di 21 anni",subtitle:"Pagamenti Limitati: Solo Bonifico Bancario"}},verifying:{title:"Verifica dell'idoneità...",subtitle:"Solo un momento"},eligible:{title:"Sei Idoneo!",subtitle:'Ottime notizie — il tuo account è <strong>pre-qualificato</strong> per pagamenti più alti.'},claim:{title:"Quasi Fatto!",subtitle:"Segui questi semplici passaggi per iniziare a guadagnare.",stepsTitle:"Il Tuo Percorso",steps:[{title:"Scarica l'App",desc:"Disponibile su iOS e Android — Meno di 60 secondi"},{title:"Completa le Offerte",desc:"Guarda video, testa app e giochi, o rispondi ai sondaggi"},{title:"Incassa i Guadagni",desc:"Pagamenti Istantanei: PayPal, Crypto, Bonifico"}],noticeBadge:"⚠️ IMPORTANTE",noticeTitle:"Attivazione Richiesta",noticeText:"Nuovi utenti: Completa ",highlightText:"2 offerte rapide",noticeSuffix:" per sbloccare l'accesso completo e iniziare a guadagnare guardando video.",cta:"Scarica Ora",fine:"Oltre 500.000 utenti guadagnano ogni giorno"}},
+      ko:{rating:"4.8/5",tag:"독점 리워드",progress:"진행",questions:[{question:"어떻게 돈을 벌고 싶으신가요?",options:["게임 플레이","설문 참여","영상 시청","앱 테스트"]},{question:"월 수입 목표는 얼마인가요?",options:["₩70,000 – ₩150,000","₩150,000 – ₩700,000","₩700,000 – ₩1,500,000","₩1,500,000+"]}],ageGate:{question:"이용 가능한 결제 옵션을 확인하려면 연령대를 선택하세요",over21:{label:"21세 이상입니다",subtitle:"즉시 출금: PayPal, CashApp, Venmo, 암호화폐 & 계좌이체"},under21:{label:"21세 미만입니다",subtitle:"제한된 출금: 계좌이체만 가능"}},verifying:{title:"자격 확인 중...",subtitle:"잠시만 기다려주세요"},eligible:{title:"자격이 확인되었습니다!",subtitle:'축하합니다 — 귀하의 계정은 <strong>높은 보상 대상</strong>입니다.'},claim:{title:"거의 다 됐습니다!",subtitle:"간단한 단계를 따라 수익을 시작하세요.",stepsTitle:"수익 여정",steps:[{title:"앱 다운로드",desc:"iOS & Android 지원 — 60초 이내 완료"},{title:"일일 오퍼 완료",desc:"영상 시청, 앱 테스트, 설문 참여"},{title:"수익 출금",desc:"즉시 출금: PayPal, 암호화폐, 계좌이체"}],noticeBadge:"⚠️ 중요",noticeTitle:"활성화 필요",noticeText:"신규 사용자: ",highlightText:"2개의 간단한 오퍼",noticeSuffix:"를 완료하여 전체 액세스를 잠금 해제하고 영상 시청으로 수익을 시작하세요.",cta:"지금 다운로드",fine:"매일 50만 명 이상이 수익을 올리고 있습니다"}},
+      zh:{rating:"4.8/5",tag:"独家奖励",progress:"进度",questions:[{question:"您想如何赚钱？",options:["玩游戏","完成调查","观看视频","测试应用"]},{question:"您每月想赚多少？",options:["¥350 – ¥700","¥700 – ¥3,500","¥3,500 – ¥7,000","¥7,000+"]}],ageGate:{question:"选择您的年龄范围以查看可用的付款选项",over21:{label:"我已满21岁",subtitle:"即时支付：PayPal、CashApp、Venmo、加密货币和银行转账"},under21:{label:"我未满21岁",subtitle:"有限支付：仅限银行转账"}},verifying:{title:"正在验证您的资格...",subtitle:"请稍候"},eligible:{title:"您已合格！",subtitle:'好消息 — 您的账户已<strong>预审通过</strong>，可享受更高报酬。'},claim:{title:"即将完成！",subtitle:"按照以下简单步骤开始赚钱。",stepsTitle:"您的赚钱之旅",steps:[{title:"下载应用",desc:"支持iOS和Android — 不到60秒"},{title:"完成每日任务",desc:"观看视频、测试应用和游戏、或参与调查"},{title:"提取收益",desc:"即时提现：PayPal、加密货币、银行转账"}],noticeBadge:"⚠️ 重要",noticeTitle:"需要激活",noticeText:"新用户：完成",highlightText:"2个快速任务",noticeSuffix:"以解锁完整访问权限，开始通过观看视频赚钱。",cta:"立即下载",fine:"超过50万用户每天在赚钱"}},
+      ar:{rating:"4.8/5",tag:"مكافأة حصرية",progress:"التقدم",questions:[{question:"كيف تريد كسب المال؟",options:["لعب الألعاب","إكمال الاستطلاعات","مشاهدة الفيديو","اختبار التطبيقات"]},{question:"كم تريد أن تكسب شهرياً؟",options:["$50 – $100","$100 – $500","$500 – $1,000","$1,000+"]}],ageGate:{question:"اختر فئتك العمرية لعرض خيارات الدفع المتاحة",over21:{label:"عمري أكثر من 21",subtitle:"دفع فوري: PayPal، CashApp، Venmo، عملات رقمية وتحويل بنكي"},under21:{label:"عمري أقل من 21",subtitle:"دفع محدود: تحويل بنكي فقط"}},verifying:{title:"جاري التحقق من أهليتك...",subtitle:"لن يستغرق سوى لحظة"},eligible:{title:"أنت مؤهل!",subtitle:'أخبار رائعة — حسابك <strong>مؤهل مسبقاً</strong> لدفعات أعلى.'},claim:{title:"!اقتربت",subtitle:"اتبع هذه الخطوات البسيطة للبدء في الكسب.",stepsTitle:"رحلتك للكسب",steps:[{title:"حمّل التطبيق",desc:"متوفر على iOS و Android — أقل من 60 ثانية"},{title:"أكمل العروض اليومية",desc:"شاهد فيديوهات، اختبر تطبيقات، أو أجب على استطلاعات"},{title:"اسحب أرباحك",desc:"دفع فوري: PayPal، عملات رقمية، تحويل بنكي"}],noticeBadge:"⚠️ مهم",noticeTitle:"التفعيل مطلوب",noticeText:"المستخدمون الجدد: أكمل ",highlightText:"عرضين سريعين",noticeSuffix:" لفتح الوصول الكامل والبدء في الكسب من خلال مشاهدة الفيديوهات.",cta:"حمّل الآن",fine:"أكثر من 500,000 مستخدم يكسبون المال يومياً"}},
+      hi:{rating:"4.8/5",tag:"विशेष इनाम",progress:"प्रगति",questions:[{question:"आप कैसे पैसे कमाना चाहते हैं?",options:["गेम खेलकर","सर्वे पूरा करके","वीडियो देखकर","ऐप टेस्ट करके"]},{question:"आप प्रति माह कितना कमाना चाहते हैं?",options:["₹4,000 – ₹8,000","₹8,000 – ₹40,000","₹40,000 – ₹80,000","₹80,000+"]}],ageGate:{question:"उपलब्ध भुगतान विकल्प देखने के लिए अपनी आयु सीमा चुनें",over21:{label:"मैं 21 से अधिक हूँ",subtitle:"तुरंत भुगतान: PayPal, CashApp, Venmo, क्रिप्टो और बैंक ट्रांसफर"},under21:{label:"मैं 21 से कम हूँ",subtitle:"सीमित भुगतान: केवल बैंक ट्रांसफर"}},verifying:{title:"आपकी पात्रता जाँची जा रही है...",subtitle:"बस एक पल"},eligible:{title:"आप पात्र हैं!",subtitle:'बधाई — आपका खाता <strong>उच्च भुगतान के लिए पूर्व-योग्य</strong> है।'},claim:{title:"लगभग हो गया!",subtitle:"कमाई शुरू करने के लिए इन सरल चरणों का पालन करें।",stepsTitle:"आपकी कमाई की यात्रा",steps:[{title:"ऐप डाउनलोड करें",desc:"iOS और Android पर उपलब्ध — 60 सेकंड से कम"},{title:"दैनिक ऑफ़र पूरे करें",desc:"वीडियो देखें, ऐप टेस्ट करें, या सर्वे भरें"},{title:"कमाई निकालें",desc:"तुरंत भुगतान: PayPal, UPI, क्रिप्टो"}],noticeBadge:"⚠️ महत्वपूर्ण",noticeTitle:"सक्रियण आवश्यक",noticeText:"नए उपयोगकर्ता: ",highlightText:"2 त्वरित ऑफ़र पूरे करें",noticeSuffix:" पूर्ण एक्सेस अनलॉक करने और वीडियो देखकर कमाई शुरू करने के लिए।",cta:"अभी डाउनलोड करें",fine:"5,00,000+ उपयोगकर्ता प्रतिदिन कमा रहे हैं"}},
+      tr:{rating:"4.8/5",tag:"Özel Ödül",progress:"İlerleme",questions:[{question:"Nasıl para kazanmak istiyorsunuz?",options:["Oyun Oynayarak","Anket Doldurarak","Video İzleyerek","Uygulama Test Ederek"]},{question:"Ayda ne kadar kazanmak istersiniz?",options:["₺1.500 – ₺3.000","₺3.000 – ₺15.000","₺15.000 – ₺30.000","₺30.000+"]}],ageGate:{question:"Mevcut ödeme seçeneklerini görmek için yaş aralığınızı seçin",over21:{label:"21 yaşından büyüğüm",subtitle:"Anında Ödeme: PayPal, CashApp, Venmo, Kripto ve Havale"},under21:{label:"21 yaşından küçüğüm",subtitle:"Sınırlı Ödeme: Sadece Banka Havalesi"}},verifying:{title:"Uygunluğunuz kontrol ediliyor...",subtitle:"Sadece bir an"},eligible:{title:"Uygunsunuz!",subtitle:'Harika haber — hesabınız <strong>yüksek ödemeler için ön onaylı</strong>.'},claim:{title:"Neredeyse Tamam!",subtitle:"Kazanmaya başlamak için bu basit adımları izleyin.",stepsTitle:"Kazanç Yolculuğunuz",steps:[{title:"Uygulamayı İndirin",desc:"iOS ve Android'de — 60 saniyeden az"},{title:"Günlük Teklifleri Tamamlayın",desc:"Video izleyin, uygulama test edin veya anket doldurun"},{title:"Kazancınızı Çekin",desc:"Anında Ödeme: PayPal, Kripto, Banka Havalesi"}],noticeBadge:"⚠️ ÖNEMLİ",noticeTitle:"Aktivasyon Gerekli",noticeText:"Yeni kullanıcılar: ",highlightText:"2 hızlı teklif tamamlayın",noticeSuffix:" tam erişimi açmak ve video izleyerek kazanmaya başlamak için.",cta:"Şimdi İndir",fine:"500.000'den fazla kullanıcı her gün para kazanıyor"}},
+      nl:{rating:"4.8/5",tag:"Exclusieve Beloning",progress:"Voortgang",questions:[{question:"Hoe wil je geld verdienen?",options:["Games Spelen","Enquêtes Invullen","Video's Kijken","Apps Testen"]},{question:"Hoeveel wil je per maand verdienen?",options:["€50 – €100","€100 – €500","€500 – €1.000","€1.000+"]}],ageGate:{question:"Selecteer je leeftijdsgroep om beschikbare uitbetalingsopties te zien",over21:{label:"Ik ben ouder dan 21",subtitle:"Directe Uitbetaling: PayPal, CashApp, Venmo, Crypto & Overschrijving"},under21:{label:"Ik ben jonger dan 21",subtitle:"Beperkte Uitbetaling: Alleen Bankoverschrijving"}},verifying:{title:"Geschiktheid wordt gecontroleerd...",subtitle:"Even geduld"},eligible:{title:"Je Komt in Aanmerking!",subtitle:'Goed nieuws — je account is <strong>vooraf gekwalificeerd</strong> voor hogere uitbetalingen.'},claim:{title:"Bijna Klaar!",subtitle:"Volg deze eenvoudige stappen om te beginnen met verdienen.",stepsTitle:"Jouw Verdienpad",steps:[{title:"Download de App",desc:"Beschikbaar op iOS & Android — Minder dan 60 seconden"},{title:"Voltooi Dagelijkse Aanbiedingen",desc:"Bekijk video's, test apps en games, of vul enquêtes in"},{title:"Cash je Verdiensten",desc:"Directe Uitbetaling: PayPal, Crypto, Bankoverschrijving"}],noticeBadge:"⚠️ BELANGRIJK",noticeTitle:"Activering Vereist",noticeText:"Nieuwe gebruikers: Voltooi ",highlightText:"2 snelle aanbiedingen",noticeSuffix:" om volledige toegang te ontgrendelen en te beginnen met verdienen door video's te kijken.",cta:"Nu Downloaden",fine:"Meer dan 500.000 gebruikers verdienen dagelijks geld"}},
+      pl:{rating:"4.8/5",tag:"Ekskluzywna Nagroda",progress:"Postęp",questions:[{question:"Jak chcesz zarabiać?",options:["Grając w gry","Wypełniając ankiety","Oglądając filmy","Testując aplikacje"]},{question:"Ile chcesz zarabiać miesięcznie?",options:["200zł – 400zł","400zł – 2000zł","2000zł – 4000zł","4000zł+"]}],ageGate:{question:"Wybierz swój przedział wiekowy, aby zobaczyć dostępne opcje wypłat",over21:{label:"Mam ponad 21 lat",subtitle:"Natychmiastowe Wypłaty: PayPal, CashApp, Venmo, Krypto i Przelew"},under21:{label:"Mam poniżej 21 lat",subtitle:"Ograniczone Wypłaty: Tylko Przelew Bankowy"}},verifying:{title:"Sprawdzanie kwalifikacji...",subtitle:"To zajmie tylko chwilę"},eligible:{title:"Kwalifikujesz się!",subtitle:'Świetna wiadomość — Twoje konto jest <strong>wstępnie zakwalifikowane</strong> do wyższych wypłat.'},claim:{title:"Prawie Gotowe!",subtitle:"Wykonaj te proste kroki, aby zacząć zarabiać.",stepsTitle:"Twoja Droga do Zarobków",steps:[{title:"Pobierz Aplikację",desc:"Dostępna na iOS i Android — Mniej niż 60 sekund"},{title:"Wykonaj Codzienne Oferty",desc:"Oglądaj filmy, testuj aplikacje lub wypełniaj ankiety"},{title:"Wypłać Zarobki",desc:"Natychmiastowa Wypłata: PayPal, Crypto, Przelew"}],noticeBadge:"⚠️ WAŻNE",noticeTitle:"Wymagana Aktywacja",noticeText:"Nowi użytkownicy: Wykonaj ",highlightText:"2 szybkie oferty",noticeSuffix:", aby odblokować pełny dostęp i zacząć zarabiać oglądając filmy.",cta:"Pobierz Teraz",fine:"Ponad 500 000 użytkowników zarabia codziennie"}},
+      ru:{rating:"4.8/5",tag:"Эксклюзивная Награда",progress:"Прогресс",questions:[{question:"Как вы хотите зарабатывать?",options:["Играть в игры","Проходить опросы","Смотреть видео","Тестировать приложения"]},{question:"Сколько вы хотите зарабатывать в месяц?",options:["$50 – $100","$100 – $500","$500 – $1,000","$1,000+"]}],ageGate:{question:"Выберите возрастную группу, чтобы увидеть доступные варианты выплат",over21:{label:"Мне больше 21",subtitle:"Мгновенные Выплаты: PayPal, CashApp, Venmo, Криптовалюта и Перевод"},under21:{label:"Мне меньше 21",subtitle:"Ограниченные Выплаты: Только Банковский Перевод"}},verifying:{title:"Проверка вашей квалификации...",subtitle:"Это займёт всего мгновение"},eligible:{title:"Вы Подходите!",subtitle:'Отличная новость — ваш аккаунт <strong>предварительно одобрен</strong> для повышенных выплат.'},claim:{title:"Почти Готово!",subtitle:"Следуйте этим простым шагам, чтобы начать зарабатывать.",stepsTitle:"Ваш Путь к Заработку",steps:[{title:"Скачайте Приложение",desc:"Доступно на iOS и Android — Менее 60 секунд"},{title:"Выполняйте Задания",desc:"Смотрите видео, тестируйте приложения или проходите опросы"},{title:"Выводите Заработок",desc:"Мгновенные Выплаты: PayPal, Криптовалюта, Перевод"}],noticeBadge:"⚠️ ВАЖНО",noticeTitle:"Требуется Активация",noticeText:"Новые пользователи: Выполните ",highlightText:"2 быстрых задания",noticeSuffix:", чтобы разблокировать полный доступ и начать зарабатывать, просматривая видео.",cta:"Скачать Сейчас",fine:"Более 500 000 пользователей зарабатывают ежедневно"}},
+      th:{rating:"4.8/5",tag:"รางวัลพิเศษ",progress:"ความคืบหน้า",questions:[{question:"คุณต้องการหารายได้อย่างไร?",options:["เล่นเกม","ทำแบบสำรวจ","ดูวิดีโอ","ทดสอบแอป"]},{question:"คุณต้องการรายได้เท่าไหร่ต่อเดือน?",options:["฿1,750 – ฿3,500","฿3,500 – ฿17,500","฿17,500 – ฿35,000","฿35,000+"]}],ageGate:{question:"เลือกช่วงอายุของคุณเพื่อดูตัวเลือกการจ่ายเงินที่มี",over21:{label:"อายุมากกว่า 21 ปี",subtitle:"จ่ายทันที: PayPal, CashApp, Venmo, คริปโต และโอนเงิน"},under21:{label:"อายุต่ำกว่า 21 ปี",subtitle:"การจ่ายจำกัด: โอนเงินเท่านั้น"}},verifying:{title:"กำลังตรวจสอบคุณสมบัติ...",subtitle:"รอสักครู่"},eligible:{title:"คุณมีคุณสมบัติ!",subtitle:'ข่าวดี — บัญชีของคุณ<strong>ผ่านการคัดเลือกล่วงหน้า</strong>สำหรับรายได้สูง'},claim:{title:"เกือบเสร็จแล้ว!",subtitle:"ทำตามขั้นตอนง่ายๆ เพื่อเริ่มหารายได้",stepsTitle:"เส้นทางรายได้ของคุณ",steps:[{title:"ดาวน์โหลดแอป",desc:"รองรับ iOS และ Android — ไม่ถึง 60 วินาที"},{title:"ทำภารกิจประจำวัน",desc:"ดูวิดีโอ ทดสอบแอป หรือทำแบบสำรวจ"},{title:"ถอนรายได้",desc:"จ่ายทันที: PayPal, คริปโต, โอนเงิน"}],noticeBadge:"⚠️ สำคัญ",noticeTitle:"ต้องเปิดใช้งาน",noticeText:"ผู้ใช้ใหม่: ทำ",highlightText:"2 ภารกิจด่วน",noticeSuffix:" เพื่อปลดล็อกการเข้าถึงเต็มรูปแบบและเริ่มหารายได้จากการดูวิดีโอ",cta:"ดาวน์โหลดเลย",fine:"ผู้ใช้มากกว่า 500,000 คนหารายได้ทุกวัน"}},
+      vi:{rating:"4.8/5",tag:"Phần Thưởng Độc Quyền",progress:"Tiến độ",questions:[{question:"Bạn muốn kiếm tiền bằng cách nào?",options:["Chơi game","Khảo sát","Xem video","Test ứng dụng"]},{question:"Bạn muốn kiếm bao nhiêu mỗi tháng?",options:["1tr – 2.5tr","2.5tr – 12tr","12tr – 25tr","25tr+"]}],ageGate:{question:"Chọn độ tuổi của bạn để xem các tùy chọn thanh toán",over21:{label:"Tôi trên 21 tuổi",subtitle:"Thanh Toán Tức Thì: PayPal, CashApp, Venmo, Crypto & Chuyển khoản"},under21:{label:"Tôi dưới 21 tuổi",subtitle:"Thanh Toán Hạn Chế: Chỉ Chuyển Khoản"}},verifying:{title:"Đang kiểm tra tư cách...",subtitle:"Chỉ mất một chút"},eligible:{title:"Bạn Đủ Điều Kiện!",subtitle:'Tin tốt — tài khoản của bạn đã được <strong>xét duyệt trước</strong> cho mức chi trả cao hơn.'},claim:{title:"Sắp Xong Rồi!",subtitle:"Làm theo các bước đơn giản để bắt đầu kiếm tiền.",stepsTitle:"Hành Trình Kiếm Tiền",steps:[{title:"Tải Ứng Dụng",desc:"Có trên iOS & Android — Dưới 60 giây"},{title:"Hoàn Thành Nhiệm Vụ",desc:"Xem video, test app, hoặc làm khảo sát"},{title:"Rút Tiền",desc:"Thanh toán tức thì: PayPal, Crypto, Chuyển khoản"}],noticeBadge:"⚠️ QUAN TRỌNG",noticeTitle:"Cần Kích Hoạt",noticeText:"Người dùng mới: Hoàn thành ",highlightText:"2 nhiệm vụ nhanh",noticeSuffix:" để mở khóa quyền truy cập đầy đủ và bắt đầu kiếm tiền bằng cách xem video.",cta:"Tải Ngay",fine:"Hơn 500.000 người dùng kiếm tiền mỗi ngày"}},
+      id:{rating:"4.8/5",tag:"Hadiah Eksklusif",progress:"Kemajuan",questions:[{question:"Bagaimana Anda ingin menghasilkan uang?",options:["Main Game","Isi Survei","Nonton Video","Tes Aplikasi"]},{question:"Berapa yang ingin Anda hasilkan per bulan?",options:["Rp750rb – Rp1,5jt","Rp1,5jt – Rp7,5jt","Rp7,5jt – Rp15jt","Rp15jt+"]}],ageGate:{question:"Pilih rentang usia Anda untuk melihat opsi pembayaran yang tersedia",over21:{label:"Saya di atas 21",subtitle:"Pembayaran Instan: PayPal, CashApp, Venmo, Crypto & Transfer"},under21:{label:"Saya di bawah 21",subtitle:"Pembayaran Terbatas: Hanya Transfer Bank"}},verifying:{title:"Memeriksa kelayakan Anda...",subtitle:"Hanya sebentar"},eligible:{title:"Anda Memenuhi Syarat!",subtitle:'Kabar baik — akun Anda <strong>sudah pra-kualifikasi</strong> untuk pembayaran lebih tinggi.'},claim:{title:"Hampir Selesai!",subtitle:"Ikuti langkah sederhana ini untuk mulai menghasilkan.",stepsTitle:"Perjalanan Penghasilan Anda",steps:[{title:"Unduh Aplikasi",desc:"Tersedia di iOS & Android — Kurang dari 60 detik"},{title:"Selesaikan Penawaran Harian",desc:"Tonton video, tes aplikasi, atau isi survei"},{title:"Cairkan Penghasilan",desc:"Pembayaran Instan: PayPal, Crypto, Transfer Bank"}],noticeBadge:"⚠️ PENTING",noticeTitle:"Aktivasi Diperlukan",noticeText:"Pengguna baru: Selesaikan ",highlightText:"2 penawaran cepat",noticeSuffix:" untuk membuka akses penuh dan mulai menghasilkan dengan menonton video.",cta:"Unduh Sekarang",fine:"Lebih dari 500.000 pengguna menghasilkan uang setiap hari"}},
+      sv:{rating:"4.8/5",tag:"Exklusiv Belöning",progress:"Framsteg",questions:[{question:"Hur vill du tjäna pengar?",options:["Spela spel","Fylla i enkäter","Titta på videor","Testa appar"]},{question:"Hur mycket vill du tjäna per månad?",options:["500kr – 1000kr","1000kr – 5000kr","5000kr – 10000kr","10000kr+"]}],ageGate:{question:"Välj din åldersgrupp för att se tillgängliga utbetalningsalternativ",over21:{label:"Jag är över 21",subtitle:"Omedelbar Utbetalning: PayPal, CashApp, Venmo, Crypto & Överföring"},under21:{label:"Jag är under 21",subtitle:"Begränsad Utbetalning: Endast Banköverföring"}},verifying:{title:"Kontrollerar din behörighet...",subtitle:"Det tar bara en stund"},eligible:{title:"Du Är Berättigad!",subtitle:'Goda nyheter — ditt konto är <strong>förkvalificerat</strong> för högre utbetalningar.'},claim:{title:"Nästan Klart!",subtitle:"Följ dessa enkla steg för att börja tjäna.",stepsTitle:"Din Intjäningsresa",steps:[{title:"Ladda Ner Appen",desc:"Tillgänglig på iOS & Android — Mindre än 60 sekunder"},{title:"Slutför Dagliga Erbjudanden",desc:"Titta på videor, testa appar eller fyll i enkäter"},{title:"Ta Ut Dina Intäkter",desc:"Omedelbar Utbetalning: PayPal, Crypto, Banköverföring"}],noticeBadge:"⚠️ VIKTIGT",noticeTitle:"Aktivering Krävs",noticeText:"Nya användare: Slutför ",highlightText:"2 snabba erbjudanden",noticeSuffix:" för att låsa upp full åtkomst och börja tjäna pengar genom att titta på videor.",cta:"Ladda Ner Nu",fine:"Över 500 000 användare tjänar pengar dagligen"}},
+      uk:{rating:"4.8/5",tag:"Ексклюзивна Нагорода",progress:"Прогрес",questions:[{question:"Як ви хочете заробляти?",options:["Грати в ігри","Проходити опитування","Дивитися відео","Тестувати додатки"]},{question:"Скільки ви хочете заробляти на місяць?",options:["$50 – $100","$100 – $500","$500 – $1,000","$1,000+"]}],ageGate:{question:"Виберіть вікову групу, щоб побачити доступні варіанти виплат",over21:{label:"Мені більше 21",subtitle:"Миттєві Виплати: PayPal, CashApp, Venmo, Криптовалюта та Переказ"},under21:{label:"Мені менше 21",subtitle:"Обмежені Виплати: Тільки Банківський Переказ"}},verifying:{title:"Перевірка вашої кваліфікації...",subtitle:"Це займе лише мить"},eligible:{title:"Ви Підходите!",subtitle:'Чудова новина — ваш акаунт <strong>попередньо схвалений</strong> для підвищених виплат.'},claim:{title:"Майже Готово!",subtitle:"Виконайте ці прості кроки, щоб почати заробляти.",stepsTitle:"Ваш Шлях до Заробітку",steps:[{title:"Завантажте Додаток",desc:"Доступно на iOS та Android — Менше 60 секунд"},{title:"Виконуйте Завдання",desc:"Дивіться відео, тестуйте додатки або проходьте опитування"},{title:"Виводьте Заробіток",desc:"Миттєві Виплати: PayPal, Криптовалюта, Переказ"}],noticeBadge:"⚠️ ВАЖЛИВО",noticeTitle:"Потрібна Активація",noticeText:"Нові користувачі: Виконайте ",highlightText:"2 швидких завдання",noticeSuffix:", щоб розблокувати повний доступ і почати заробляти, переглядаючи відео.",cta:"Завантажити Зараз",fine:"Понад 500 000 користувачів заробляють щодня"}}
+    };
 
-<!-- SCREEN 1: Age Gate -->
-<div id="screen-age" class="screen active">
-  <div class="app-icon">
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ8NDQ0NFREWFhURFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OFRAPFS0dHR4tLSstLSsrLS0tKy0tLSstKy0tLS0tLS0tLSstLS0tKy0tLS0tLS0tLS0tLS0tLS0rLf/AABEIAOEA4QMBEQACEQEDEQH/xAAbAAEBAAIDAQAAAAAAAAAAAAAAAQIGBAUHA//EAEcQAAIBAwAFBggJCQkAAAAAAAABAgMEEQUGEiExFkFRUpGhExUiU2FxgdIyM1RydJKUsbMjQkNik6LB0dMHFCREssLD4fD/xAAbAQEBAAMBAQEAAAAAAAAAAAAAAQIDBAYFB//EACoRAQACAgAEBAcBAQEAAAAAAAABAgMRBAUTURIVITEUIjJBUmKhcTMk/9oADAMBAAIRAxEAPwDQ2yvi6YthkxbC6YthWLZWTFsKjYZMWyqxbCsWwqZDJiyiMKxYZIwqFECoFQCBUCgEKAVAAUAAAO9bNT5WmLYXSNlVi2FYthdMWwyRsqsWwrFsKjYVi2VUYVGwrFhUKqBUCoBAoBAqFAKAQKAAAADumzW+Zpi2F0jYVi2FRsKxbKrFsKjYZI2FYtlEYVGFYsKgVCqgVAAVAIVQCBQCAAoAAAAO3bNb5yNhdMchdI2VWLYVMhUyFYthUKqAYthUYVAqFVAAVAqAQqgECgACBQAAAAAO0bNbg0jYVMlGOQukyFTIVGyqmQqBWIVAIVUCgECoFQAFQoAQKAAqAAAAAAA7LJg4UyFY5CmQrFsKmSiBUyFQKgVCiBQCBUCoACoUAIFAAVAAAAAAAAOfkwcaZC6MhUyUQKgEyFQKgVCiBTADAEwF2YBtMA2YC7TANo0VdgVAAVAAAAAAAAObkwcpkogVAJkKgVAIVQKJBHLsNH1rmap0KU6s3+bCLbx0voRJmIYXyRX3ls9pqHVxm5uaFDphHNeovXs+T3mqcsPm5ea4Kem9uatRrTnvqzfotIpfiGPWcvnmPtJyHs/ltf7LH+oOseeY+0nIaz+W1/ssf6g6x55j7SchrP5bX+yx98dY89x9pOQ1n8tr/ZY++Osee4+0o9RbP5dX+yxf/IOsee4+0uHe6gzw3a3NO4a/Rzi6FSXqzlPtMoyw6sHN8OSdb0064t505ShOLhODcZRksOLXFNG6J2+vW8TG4fBlZgVAAAAAAAAOXkxcxkCZCoFTIAKhRAogO11f0PO9rqlF7MUturUfCnTXGX/XS0YWtqHNxGeuGk2s9KtaVK2p+Ato+Dp/nP8ASVX1py5/VwRy2tMvHcXx2TPb31CmLhANb1j1gqWtd0acYvZjFycudySe7tN1McTG3o+A5ZiyYovf1mXw0NrPVrXFKjOEcVZxhmPFNvCZbYoiNt3E8pw1x2mvpMNraNDy0gAAB1esmgY6Qh4SmlG9hHdzK5il8F/r9D5+HQbsd9PQcr5lNZjHkl5pWpShJxknGUW1JNYaa5mdMS9TW0THo+LK2AAAAAFAABycmDnTIVMgAqFECgAKsQxl6RqhaKhYxljy7qTqSfP4OLajHt2n7UcuWdy8pzriJtkjHHtDtzU+G63S+maVovK8qbWVBcfb0GdaTL6fBcsvn+afSGsXGuFdvyIQiubnZujFD7uPk+CI9Y26LSmkJ3NV1amNpqMXj0LC7jbWuo0+ngwVxVitfZ87K7lRqwqwxtU5Kcc8MrgJjcaZ5McXrNZ+7u+V91+p2GvpQ+d5Tw/4vpS1uucrKg1zrA6UMbcp4eY+luej7uNxRp1o7lNPd0SXFHPaNTp5fjeG+HyzX7OQYuQTA6jWjQCv4uvRSV5BeVFf5mK/3/f6+O7Hk16S9HyvmXtjyS81qQcW01hrc0+KOqHp6zt8wzCgAABQAB98mDnAqZKIFAAECgGcAxs9Zs47NC2j0W9Hvgn/ABOK3u8Jx9t8Rf8A1bmsqVOpVlwpwlN+nHBdoiNy18Jh6uWtHll/dzrVJVJvMpNt/wAjsiNQ93ixxSsRDjJNlbdxDLwUuh9jJuGPUr3XwMuh9jG4OpXueCl0PsZdwdSvd9KFtUnJRhCcpSeIxjFuTfQkTcMZyV7vTtDWErS0o0am6r5VSpHjsOXCPrwlk5ck7l4/m2auTP8AL9nLNb5YATaeVua4AidNK/tCtYqvSrxSTr026mN2aibTl7Vh+vJ1YZ3D2fJ+Itlw/N9moM3vtQgAAFUAAA+uTFoQKAQKAAIACvpT4hhZ63b/ABVD6PQ/DRwz7vBcb/3v/rgazPFhc+qmv30Z4/qh18nj/wBEPMpcTrezhv2oVpTp28rrYjKvOpKEJyipeChFLfHPBvPH0HPltO9PPc44zJjtFKTptfjGv52Xcady+B8Xn/OTxjX87LuG5Pi8/wCcnjGv52XcNyfF5/zlHf12seFnv6HgblJ4rNMam8uMRoAAADTf7Qaqc7anzxpyk/bJ/wAjpwx7vXcipMYZnvLTmdD78IFAAAAUAMzBpAoAAgUAgAo+lPiRjZ65b/FUPo9D8NHDPu8Dxv8A3v8A66/Wh40fc+nwa/fRnj+qHZyaP/RDzKTOt7OIbTqnp+nQpuhWezHbc4S5k3xT7EaclJn1h8bmnL7cRq1PeGy+PrTz0e80+CXw/KOI7Hj2089HvHgsnlHEdjx7aeej3jwWPKOI7Hj2089HvHgseUcR2PHtp56PePBY8o4jsePbTz0e8eCx5RxHY8e2nno948Fl8o4js+dfWK0hFy8IpY4RXFljHaWePk2e1oi3s0HTGkJXVadWW7a3RXViuCOqlfDGnreGwRhpFI+zrzN0gVSgAAAAKYNQACgEAFAKAZ02RjZ67b/FUPo9D8NHFPu8DxkTPEXiO7VtdtKw8GrWEk25KdTD4Y4LvN2Kv3fe5NwVse8l492kNnQ9FAmDTLaCeE2weE2weE2wvhVMJpy7awuK0ZSpUatSMFmcoQlKMV0trgSZiGub1j3lxWytkQxcistMWFCqAAAACgAIYNYAAAAqFAC4CbZJESZdxLWG7dJUvCYioqOVulspYRh042444LDF5v4fV1M228ttt87M3XGoYbJWezZBs2QbNkG0wVRAbLqboSF3VnOvl29BKU4p4dST+DDPNnf7EzVkv4YfN5jxnw+Pf3l6NbVmnTp00qVKLSjSprYhFepcfWcu5l5CeKy5ckTazxy8X5Sfz5fed1faHvcX0w45k2gUAoAAUAKAwBia2sKqAAAAD60KUpyjCKcpSajFLe23zEmdMbWiI3Lf7PUi1pwSu61aVZrMo2+xGFN9Xaedp/8At5onN2efz87rS81rG335H6M6179el7pj1paPPf1n+LyP0Z1r369L3R1pPPf1n+HI/RnWvfr0vdHWk89/Wf4nI/RnWvfr0vdHWlfPf1n+HI/RnWvfr0vdL1pPPv1n+HI/RnWvfr0vdHWk8+/Wf4cjtGda9/aUvdHWk8+/Wf46TWbVSnb0Xc2tSdSlFpVadVJVKeeEsrdJdnMbKZdzqX0uB5nTiJ8PtLUkjc+s9C1FjiyqPnlcb/ZHd97OTN7vKc+tPjrDY7f4cPnI1PhY/rh5De/GT+fL7zvr7Q/RcX0w45k3AAAUUAFAigMAfMwYAAAFACA2XUSgpX1OTWVSjUqr5yi9l9uDVln5XzOaZZpw9phv7ZyPDAAAAAA0A0A063WS5hTsrhSa/KQUIrpltJ/wNmON2h9bk+K9s8WiPSHmR2vaPQdR1/gZfSJf6YnJm+p5Tn3/AEr/AI2K3+HD5yNT4eP64eRXvxk/ny+876+0P0XF9MOOZNwUAAFAAUoAMAfE1sQAAAAVAbLqLXjC8Sk8eEpzgvW1uNWWPR8rmuOb8PaIb+cjxAAA+dzWVKlUqveqcHNrpxzGURuXRwuHrZa07vPrrWO6nJyVRxT4RjuSR1Rjh7PFwOGtYiKvh4/u/PSL06tvweL8YOUF356Q6dT4LF+Jygu/PSHTqfBYfxcS7vqtZ5qTlPHDL3IyisR7N+PDSn0xp8IRyzJnMvUdB2TtrOhSksTknWqLolPGF69lROLJbcvE83zxkzzr7OwoPE4voeTCHz8UbvV5FdvM5vplL7z6FfaH6Lj+mHwMm1QADBRcAUAFUoYCOOamIAAAAAH1o1HGSlFtNPKa4pkmGNqxMal6Fq1p5XMVTqNKtFftF0+s5clNPKc05bNJnJjj0d8anwADGrQjVp1KM3sxq05U9rjst8Jex4MqzqXTweaMWat5aDeao6SpycVaVqq5p0IOtTkulOJ1xkh7bHxWO0bizj8ltJ/ILz7PU/kXx17tvxGPu628s6tCbp1qc6VRYbhUi4zWd6ynwMomJ9m2l62jcSwt6E6k404Rc5zajGMVmUpPgkukszr1W1orG5d1b6oaTm8f3KvD01Y+Bj2ywjCclXPbisdY34mz6C1Tp2slWupQrVo74UKb2qUJdM5cJY6Fu9PMab5d+kPicdzesRNcXrLvZycm5N5beW/SaHmZmZncuJpS6VC3rVW8YhJR+dJYX39xlSNy7uW4Zy56x2eWVHlnfD3lYYFZhRQLgKFFwAAoDBRxjSwAAUAAAKgj7W9aUJKUW1KLymuZkmNsL0i0al6Jq5pyN1DYm0q0VvXXXSjlyU08lzPls45nJjj0d0anwwCqbXBteplWLTHtK+El1pdrIvjt3avrVq3eXVy7i3pOtTqQp74Si5RlGKi1JZyuHedOO8RD13LOKxxgrG/WHG0DqpfUrqhVrUJUaVKpGpOdRxSSi84W/e2ZXvE1l0cXxeOMNvm+zcZzb52/WzleIm0yxIiSkkm20kt7b3JIrPHjte3hrG5aLrXppV5KjTf5KDy3159J14cevWXsuV8B8PTdveWts3vsQFVQpgouAKBShgC4AFHDNDEAAAKAAAVMo+9tcSpyjOEnGUXlNEmNtd6RaNS3Kw1xg0lXg1LnlHemc9sM/Z53ieRxaZnHOnP5VWnWl2GHSs4/I8vc5U2nWl2DpWPI8vc5U2nWl2DpWPI83c5VWnWl2DpWPI83c5VWnWl2DpWXyPN3OVNp0y7B0bJ5Hm7uPc63UIr8nCU36dyMowS34uQzv57Nd0pp+vceS3sQ6sdy9pvpiiH2+G4DFgj5YdO2bX0IhCquCqqAoFKLgBgouALgAUcE52IAAAAKAKAFAyTCaXaBo2gaXaKaXaBo2gaXaKaMhdIVVApVAKUUC4KLgC4KLgCpAMBXXnOwAAACgCgACqAKKBQAFKKAKKBQKVVwUXAFSAuCi4KLgC4AuCi4Crgo6w5WAAAAUAUAqgAKUUABSigCigUqqgLgooGWCi4AuCi4KLgC4KqpAZYKGAOqORgAAAFKAVQAFKAFApQApRQKVVQGWCipAXBRUijJIC4KKkVVwBlgoqQFwUXAHTnGwAAFKAAKoAooFAFFAoFKKVVQGRRQKkUZJFFwBUiqySKMkiipAVIoywUVICgdIcTAAAUqgFAFFAAUooFApRQqooyRRUgKkUZJFFSKMkFZJFFSKMkiipAZYLoZJFFwUMDSuiOBrAoUUABQBRQKBSigUooVSjJFFQFRRkkUVIoySCskUZJFFSKMkijJIoySKKkFZJFDBdDXz5zAAFFAoAooACoooFAqKKVWSKioKpRkijJAZIqqijNFRRCskZQiorJkWD7skVGS5hCskAKP/9k=" onerror="this.style.display='none'; this.parentNode.innerHTML='<svg width=\'44\' height=\'44\' viewBox=\'0 0 44 44\' fill=\'none\'><circle cx=\'22\' cy=\'22\' r=\'18\' stroke=\'#3de87a\' stroke-width=\'2.5\'/><text x=\'22\' y=\'28\' text-anchor=\'middle\' fill=\'#3de87a\' font-size=\'18\' font-weight=\'900\'>$</text></svg>'" alt="Freecash">
-  </div>
+    var FALLBACKS={ms:"id",nb:"sv",no:"sv",nn:"sv",da:"sv",fi:"en",cs:"pl",sk:"pl",ro:"it",hu:"de",el:"en",he:"en",iw:"en","zh-tw":"zh","zh-hk":"zh"};
 
-  <div class="offer-badge">
-    <span class="dot"></span>
-    Scroll Videos Offer
-  </div>
+    function detectLang(){
+      var l=(navigator.language||navigator.userLanguage||"en").toLowerCase();
+      var p=l.split("-")[0];
+      if(TRANSLATIONS[p])return p;
+      if(FALLBACKS[p])return FALLBACKS[p];
+      if(FALLBACKS[l])return FALLBACKS[l];
+      return"en";
+    }
 
-  <div class="headline">ARE YOU <span class="green">21+</span>?</div>
-  <div class="subline">Turn your scroll time into real money.</div>
+    var urlLang=new URLSearchParams(window.location.search).get("lang");
+    var T=(urlLang&&TRANSLATIONS[urlLang])?TRANSLATIONS[urlLang]:(TRANSLATIONS[detectLang()]||TRANSLATIONS.en);
 
-  <div class="info-box">
-    <div class="info-title">Important – Please Read</div>
-    <div class="info-item">
-      <div class="info-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#3de87a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-        </svg>
-      </div>
-      <div class="info-text">You must be <b>at least 21 years old</b> at sign-up to unlock the Scroll Videos offer</div>
-    </div>
-    <div class="info-item">
-      <div class="info-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#3de87a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-        </svg>
-      </div>
-      <div class="info-text">Already have the app? <b>Create a new account</b> through this page – existing accounts are not eligible</div>
-    </div>
-  </div>
+    var chevronSVG='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+    var checkSVG='<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+    var mailSVG='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>';
+    var dollarSVG='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>';
+    var giftSVG='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>';
+    var appleSVG='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>';
+    var starSVG='<svg viewBox="0 0 24 24" fill="currentColor" class="star"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+    var ctaChevronSVG='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
 
-  <button class="btn-yes" onclick="showLanding()">Yes, I am 21 or older</button>
-  <button class="btn-no" onclick="showBlocked()">No, I am under 21</button>
-</div>
+    var step=0;
+    var app=document.getElementById("app");
 
-<!-- SCREEN 2: Blocked -->
-<div id="screen-blocked" class="screen">
-  <div class="lock-icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-    </svg>
-  </div>
-  <div class="blocked-title">MINIMUM AGE: 21+</div>
-  <div class="blocked-sub">This offer is only available to users aged 21 and over.</div>
-  <button class="btn-back" onclick="showAge()">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="15 18 9 12 15 6"/>
-    </svg>
-    Go Back
-  </button>
-</div>
+    function render(){
+      var total=T.questions.length+1,current=Math.min(step+1,total),pct=(current/total)*100;
+      var content="";
+      if(step===0){
+        var q=T.questions[0];
+        content='<div class="fade-up"><h2 class="question">'+q.question+'</h2>'+q.options.map(function(o,i){return'<button class="option fade-up" style="animation-delay:'+i*60+'ms" onclick="answer()"><span>'+o+'</span>'+chevronSVG+'</button>'}).join("")+'</div>';
+      }else if(step===1){
+        content='<div class="fade-up"><h2 class="question">'+T.ageGate.question+'</h2><button class="age-btn age-over fade-up" onclick="answer()"><div class="age-label">'+T.ageGate.over21.label+'</div><div class="age-sub">'+T.ageGate.over21.subtitle+'</div></button><button class="age-btn age-under fade-up" style="animation-delay:60ms" onclick="answer()"><div class="age-label">'+T.ageGate.under21.label+'</div><div class="age-sub">'+T.ageGate.under21.subtitle+'</div></button></div>';
+      }else if(step===2){
+        var q2=T.questions[1];
+        content='<div class="fade-up"><h2 class="question">'+q2.question+'</h2>'+q2.options.map(function(o,i){return'<button class="option fade-up" style="animation-delay:'+i*60+'ms" onclick="answer()"><span>'+o+'</span>'+chevronSVG+'</button>'}).join("")+'</div>';
+      }else if(step===3){
+        content='<div class="verifying fade-up"><div class="spinner-wrap"><div class="spinner-bg"></div><div class="spinner"></div></div><h2>'+T.verifying.title+'</h2><p>'+T.verifying.subtitle+'</p></div>';
+      }else if(step===4){
+        content='<div class="eligible fade-up"><div class="check-circle scale-bounce">'+checkSVG+'</div><h2>'+T.eligible.title+'</h2><p>'+T.eligible.subtitle+'</p></div>';
+      }else{
+        content='<div class="claim fade-up"><h2>'+T.claim.title+'</h2><p>'+T.claim.subtitle+'</p><div class="steps-box"><h3>'+T.claim.stepsTitle+'</h3>'+T.claim.steps.map(function(s,i){var icons=[mailSVG,dollarSVG,giftSVG];return'<div class="step" style="animation:slideStagger .4s ease-out '+i*120+'ms both"><div class="step-icon" style="animation:numPop .5s ease-out '+(200+i*120)+'ms both">'+icons[i]+'</div><div class="step-text"><strong>'+s.title+'</strong><span>'+s.desc+'</span></div></div>'}).join("")+'</div><div class="notice"><div class="notice-badge">'+T.claim.noticeBadge+'</div><div class="notice-header"><span style="font-size:20px">🔓</span><span class="notice-title">'+T.claim.noticeTitle+'</span></div><p>'+T.claim.noticeText+'<span class="highlight">'+T.claim.highlightText+'</span>'+T.claim.noticeSuffix+'</p></div><a href="'+BASE_URL+'" class="cta" id="downloadNowBtn">'+appleSVG+' '+T.claim.cta+' '+ctaChevronSVG+'</a><p class="fine">'+T.claim.fine+'</p></div>';
+      }
+      app.innerHTML='<div class="logo-wrap"><img src="/images/logo.png" alt="Logo" class="logo-banner"></div><div class="stars">'+starSVG+starSVG+starSVG+starSVG+starSVG+'<span class="rating">'+T.rating+'</span></div><p class="tag">'+T.tag+'</p><div class="progress-wrap"><div class="progress-labels"><span>'+T.progress+'</span><strong>'+current+'/'+total+'</strong></div><div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div></div><div class="content">'+content+'</div>';
+       // Fire TikTok event ONLY when the Download Now button is clicked
+      var btn = document.getElementById("downloadNowBtn");
+      if (btn) {
+        btn.addEventListener("click", function () {
+          if (window.ttq && typeof ttq.track === "function") {
+            ttq.track("ClickButton", {
+              button_name: "Download Now",
+              page: "landing"
+            });
+          }
+        }, { once: true }); // optional: only fires once per page load
+      }
 
-<!-- SCREEN 3: Landing Page -->
-<div id="screen-landing" class="screen">
-  <div class="logos-row">
-    <div class="logo-box">
-      <img src="data:image/jpeg;base64,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"
-        onerror="this.style.display='none'; this.parentNode.innerHTML='<svg width=\'32\' height=\'32\' viewBox=\'0 0 32 32\'><circle cx=\'16\' cy=\'16\' r=\'13\' stroke=\'#3de87a\' stroke-width=\'2\' fill=\'none\'/><text x=\'16\' y=\'21\' text-anchor=\'middle\' fill=\'#3de87a\' font-size=\'14\' font-weight=\'900\'>$</text></svg>'"
-        alt="Freecash">
-    </div>
-    <div class="logo-x">×</div>
-    <div class="logo-box tiktok">
-      <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAPUA9QDASIAAhEBAxEB/8QAHQABAAMBAAMBAQAAAAAAAAAAAAYHCAUCAwQJAf/EAE0QAQABAwEDBQwFCgQDCQEAAAABAgMEBQYHESExN0FzCBITIlFhcYGRsbLBFDZCcqEVFyMyNVJilLPRJDNDolSC4RYnU2OSk8LS8HT/xAAcAQEAAQUBAQAAAAAAAAAAAAAABQIDBAYHAQj/xABBEQEAAQIDAwcKBQEIAgMAAAAAAQIDBAURBiExEkFRYXFysRMiMzQ1gZGhwdEHFDJCUuEVFiNTYoKSsiTwJVTC/9oADAMBAAIRAxEAPwDGQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//2Q=="
-        
-        alt="TikTok">
-    </div>
-  </div>
+    }
 
-  <div class="qualified-badge">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="20 6 9 17 4 12"/>
-    </svg>
-    You're Qualified
-  </div>
-
-  <div class="landing-headline">Get Paid to <span class="green">Play</span><br>and <span class="green">Scroll</span></div>
-  <div class="landing-sub">Download. Scroll &amp; Test Games. Get Paid.</div>
-
-  <button class="btn-download">
-    <svg class="dl-icon" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-    </svg>
-    <div class="dl-text">
-      <div>Download &amp; Sign Up</div>
-      <div class="sub">iOS &amp; Android</div>
-    </div>
-  </button>
-
-  <div class="section-label">Featured Offers</div>
-
-  <div class="offer-card">
-    <div class="play-circle">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="#3de87a">
-        <polygon points="5 3 19 12 5 21 5 3"/>
-      </svg>
-    </div>
-    <div class="offer-info">
-      <div class="offer-name">
-        Scroll Videos on FreeCash
-        <span class="rate-badge">$149/HR</span>
-      </div>
-      <div class="offer-name-sub">Earn $149 for every hour of scrolling</div>
-    </div>
-    <div class="offer-right">
-      <div class="offer-price">$149</div>
-      <div class="offer-stars">★ 5.0</div>
-    </div>
-    <div class="offer-arrow">›</div>
-  </div>
-
-  <div class="activation-card">
-    <div class="important-badge">
-      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.5l8.5 15.5H3.5L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
-      Important
-    </div>
-    <div class="activation-inner">
-      <div class="lock-sm">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-        </svg>
-      </div>
-      <div>
-        <div class="activation-title">Activation Required</div>
-        <div class="activation-desc">
-          New users: Complete <span class="hl">2 quick tasks</span> to unlock the Scroll Offer.
-          Already completed the tasks? Just start the <span class="green">Scroll Offer</span> on your dashboard!
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-label">How It Works</div>
-
-  <div class="step-card">
-    <div class="step-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#3de87a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-    </div>
-    <div>
-      <div class="step-title">Download the App</div>
-      <div class="step-desc">Install FreeCash &amp; instantly get <span class="green">$10.</span></div>
-      <button class="step-btn">Free Download</button>
-    </div>
-  </div>
-
-  <div class="step-card">
-    <div class="step-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#3de87a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <line x1="12" y1="8" x2="12" y2="12"/>
-        <line x1="12" y1="16" x2="12.01" y2="16"/>
-      </svg>
-    </div>
-    <div>
-      <div class="step-title">Earn by Scrolling Videos and Testing Games</div>
-      <div class="step-desc">Scroll, play games, complete tasks &amp; earn <span class="green">real money.</span></div>
-      <button class="step-btn">Easy to Start</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  function showLanding() {
-    document.getElementById('screen-age').classList.remove('active');
-    document.getElementById('screen-landing').classList.add('active');
-    window.scrollTo(0, 0);
-  }
-  function showBlocked() {
-    document.getElementById('screen-age').classList.remove('active');
-    document.getElementById('screen-blocked').classList.add('active');
-    window.scrollTo(0, 0);
-  }
-  function showAge() {
-    document.getElementById('screen-blocked').classList.remove('active');
-    document.getElementById('screen-age').classList.add('active');
-    window.scrollTo(0, 0);
-  }
-</script>
+    function transition(cb){var el=document.querySelector(".content");if(el)el.classList.add("hidden");setTimeout(function(){cb();render()},300)}
+    function answer(){if(step<2){transition(function(){step++})}else{transition(function(){step=3});setTimeout(function(){transition(function(){step=4})},2200);setTimeout(function(){transition(function(){step=5})},4200)}}
+    render();
+  </script>
 </body>
 </html>
